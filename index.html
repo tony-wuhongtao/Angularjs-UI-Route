@@ -1,80 +1,64 @@
 <!DOCTYPE html>
-<html ng-app="myapp">
-
+<html>
 <head>
-    <title>AngularJS: UI-Router Quick Start</title>
-    <!-- Bootstrap CSS -->
+    <title>AngularJS: UI-Router</title>
+
     <link href="Content/bootstrap.min.css" rel="stylesheet">
+	<link href="Content/font-awesome.css" rel="stylesheet">
+	<link href="Content/Style.css" rel="stylesheet">
+	
+	<script src="Scripts/angular.min.js"></script>
+	<script src="Scripts/angular-ui-router.js"></script>
+	<script src="Scripts/jquery.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+	
+	<script src="App/app.js"></script>
 </head>
-
-<body class="container">
-
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" ui-sref="index">Quick Start</a>
-      <ul class="nav">
-        <li><a ui-sref="index">Home</a></li>
-        <li><a ui-sref="route1">Route 1</a></li>
-        <li><a ui-sref="route2">Route 2</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="span6">
-      <div class="well" ui-view="viewA"></div>        
-    </div>
-    <div class="span6">
-      <div class="well" ui-view="viewB"></div>        
-    </div>
-  </div>         
-  
-  <!-- Angular -->
-  <script src="Scripts/angular.min.js"></script>
-  <!-- UI-Router -->
-  <script src="Scripts/angular-ui-router.js"></script>
-  
-  <!-- App Script -->
-  <script>
-    var myapp = angular.module('myapp', ["ui.router"])
-    myapp.config(function($stateProvider){
-    $stateProvider
-        .state('index', {
-            url: "",
-            views: {
-                "viewA": {
-                    template: "index.viewA"
-                },
-                "viewB": {
-                    template: "index.viewB"
-                }
-            }
-        })
-        .state('route1', {
-            url: "/route1",
-            views: {
-                "viewA": {
-                    template: "route1.viewA"
-                },
-                "viewB": {
-                    template: "route1.viewB"
-                }
-            }
-        })
-        .state('route2', {
-            url: "/route2",
-            views: {
-                "viewA": {
-                    template: "route2.viewA"
-                },
-                "viewB": {
-                    template: "route2.viewB"
-                }
-            }
-        })
-    })
-  </script>
-
+<body>
+	<div  ng-app="myapp" ng-controller="mainCtrl">
+		<div class="navbar navbar-default topnavbar">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#" ng-click="toggleStyle()">
+						<em class=" fa fa-navicon">{{comment}}
+						</em>
+					</a>
+				</li>
+			</ul>
+		 </div>
+		<aside class="rightbar" id="rightMenu" ng-class="{'noneStyle' : noneStyle}">
+			<ul>
+				<li><a ui-sref="Dashboard"><i class="fa fa-tachometer"></i>Dashboard</a></li>
+				<li><a ui-sref="Administration"><i class="fa fa-user"></i>Administration</a></li>
+				<li><a ui-sref="Configuration"><i class="fa fa-cog fa-spin"></i>Configuration</a></li>
+				<div class="accordion" id="rightMenu">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<li>
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#rightMenu" href="#Tools">
+									<i class="fa fa-wrench"></i>Tools
+								</a>
+							</li>
+						</div>
+						<div id="Tools" class="accordion-body collapse" style="height: 0px; ">
+							<div class="accordion-inner">
+								<ul>
+									<li>Editor</li>
+									<li>Writer</li>
+									<li>Sender</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</aside>
+		<div class="container" style="margin-top:50px;">
+			<div class="row">
+				<div class="span12">
+				<div class="well" style=" height:500px;" ui-view="viewA">Content</div>        
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>
